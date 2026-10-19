@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simulador de Ecosistema</title>
+        <meta charset="UTF-8">
+
+        <style>
+            body {
+                font-family: Arial;
+                background-color: #eeeeee;
+                text-align: center;
+            }
+
+            button {
+                padding: 10px;
+                margin: 5px;
+                cursor: pointer;
+            }
+
+            #ecosistema {
+                width: 800px;
+                height: 400px;
+                background-color: #d5f5d5;
+                border: 2px solid green;
+                position: relative;
+                margin: 20px auto;
+            }
+
+            .organismo {
+                position: absolute;
+                font-size: 28px;
+                cursor: pointer;
+            }
+
+            #estadisticas {
+                background-color: white;
+                padding: 10px;
+            }
+
+            #log-eventos {
+                background-color: white;
+                padding: 10px;
+                margin: 20px auto;
+                width: 780px;
+                text-align: left;
+            }
+
+            #informacion {
+                background-color: white;
+                padding: 10px;
+                margin: 10px auto;
+                width: 780px;
+            }
+        </style>
+
+        <script src="script.js"></script>
+    </head>
+
+    <body>
+
+        <h1>Control del Ecosistema</h1>
+
+        <div id="panel-control">
+            <button onclick="anadirEspecie('herbivoro')">
+                Añadir Herbívoro
+            </button>
+
+            <button onclick="anadirEspecie('carnivoro')">
+                Añadir Carnívoro
+            </button>
+
+            <button onclick="anadirEspecie('planta')">
+                Añadir Planta
+            </button>
+
+            <button onclick="anadirEspecie('omnivoro')">
+                Añadir Omnívoro
+            </button>
+
+            <button onclick="pausarSimulacion()">
+                Pausar / Reanudar
+            </button>
+        </div>
+
+        <h2>Estadísticas</h2>
+
+        <div id="estadisticas">
+            Herbívoros: <span id="count-herbivoro">0</span> |
+            Carnívoros: <span id="count-carnivoro">0</span> |
+            Plantas: <span id="count-planta">0</span> |
+            Omnívoros: <span id="count-omnivoro">0</span> |
+            Generación: <span id="generacion">1</span>
+            <p id="estado">Estado: Equilibrado</p>
+        </div>
+
+        <div id="ecosistema"></div>
+
+        <div id="informacion">
+            Selecciona un organismo para ver su información.
+        </div>
+
+        <div id="log-eventos">
+            <h3>Registro de eventos:</h3>
+            <div id="eventos-lista"></div>
+        </div>
+
+    </body>
+</html>
