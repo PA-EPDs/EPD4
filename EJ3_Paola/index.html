@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cuadrado mágico</title>
+        <link rel="stylesheet" href="estilos.css">
+    </head>
+    <body>
+        <main>
+            <h1>Cuadrado mágico</h1>
+            <p class="intro">Coloca las cifras del 1 al 9 sin repetir para que todas las filas, columnas y diagonales sumen lo mismo.</p>
+
+            <div id="estado">
+                <div class="dato">Suma objetivo: <b id="objetivo">15</b></div>
+                <div class="dato">Celdas restantes: <b id="restantes">9</b></div>
+                <div class="dato">Intentos: <b id="intentos">0</b></div>
+                <div class="dato">Fallos hasta pista: <b id="fallos">0</b>/3</div>
+                <div class="dato">Tiempo: <b id="tiempo">0</b> s</div>
+            </div>
+
+            <table id="tablero">
+                <tr>
+                    <td data-indice="0"></td><td data-indice="1"></td><td data-indice="2"></td>
+                </tr>
+                <tr>
+                    <td data-indice="3"></td><td data-indice="4"></td><td data-indice="5"></td>
+                </tr>
+                <tr>
+                    <td data-indice="6"></td><td data-indice="7"></td><td data-indice="8"></td>
+                </tr>
+            </table>
+
+            <div id="mensaje" class="mensaje" role="status" aria-live="polite"></div>
+            <button id="btnOtro" hidden>Sí, intentar otro</button>
+
+            <div id="sumas"></div>
+
+            <div class="botones">
+                <button id="btnNueva">Nueva partida</button>
+                <button id="btnResolver">Resolver</button>
+            </div>
+        </main>
+
+        <script src="script.js"></script>
+    </body>
+</html>
