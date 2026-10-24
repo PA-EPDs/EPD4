@@ -1,0 +1,446 @@
+/* ==========================================================
+   Panel de Control de Misión Espacial - Estilos CSS
+   ========================================================== */
+
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: #151c2c;
+    --card-border: #2a364f;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-green: #22c55e;
+    --accent-red: #ef4444;
+    --accent-yellow: #f59e0b;
+    --hover-highlight: #1e293b;
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'Consolas', 'Courier New', Courier, monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.panel-control-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cabecera */
+.cabecera-mision {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.cabecera-mision h1 {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.indicadores-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.indicador {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.indicador .etiqueta {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.valor-estado {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.valor-tiempo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--accent-blue);
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(56, 189, 248, 0.1);
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.valor-sistemas {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-yellow);
+}
+
+/* Alerta crítica con parpadeo */
+.alerta-parpadeo {
+    color: #ffffff !important;
+    background-color: var(--accent-red) !important;
+    animation: parpadeoAlerta 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes parpadeoAlerta {
+    from {
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
+    }
+    to {
+        opacity: 0.4;
+        box-shadow: 0 0 2px rgba(239, 68, 68, 0.2);
+    }
+}
+
+/* Barra de Botones */
+.barra-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s, transform 0.1s;
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.btn-iniciar {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.btn-iniciar:hover:not(:disabled) {
+    background-color: #1d4ed8;
+}
+
+.btn-lanzar {
+    background-color: var(--accent-green);
+    color: #0b0f19;
+}
+
+.btn-lanzar:hover:not(:disabled) {
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+.btn-abandonar {
+    background-color: var(--accent-red);
+    color: #ffffff;
+}
+
+.btn-abandonar:hover:not(:disabled) {
+    background-color: #dc2626;
+}
+
+.btn-reiniciar {
+    background-color: #475569;
+    color: #ffffff;
+}
+
+.btn-reiniciar:hover:not(:disabled) {
+    background-color: #64748b;
+}
+
+/* Popup de advertencia de acción bloqueada */
+.popup-alerta {
+    display: none;
+    background-color: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fee2e2;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    animation: slideDown 0.25s ease-out;
+}
+
+.popup-alerta.visible {
+    display: block;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Área Principal */
+.area-principal {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .area-principal {
+        grid-template-columns: 1fr;
+    }
+}
+
+.seccion-sistemas h2,
+.panel-lateral h2,
+.seccion-consola h2 {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Contenedor de Tarjetas */
+.contenedor-tarjetas {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 380px;
+}
+
+/* Tarjeta individual de sistema */
+.tarjeta-sistema {
+    background-color: #0f172a;
+    border: 2px solid var(--card-border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+/* Resaltado temporal por mouseover */
+.tarjeta-resaltada {
+    background-color: var(--hover-highlight) !important;
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+}
+
+/* Estado Operativo */
+.tarjeta-sistema.operativo {
+    border-color: var(--accent-green) !important;
+    background-color: rgba(34, 197, 94, 0.08) !important;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+.info-sistema {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nombre-sistema {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.atajo-tecla {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+.estado-sistema {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tarjeta-sistema.operativo .estado-sistema {
+    color: var(--accent-green);
+}
+
+.btn-activar-sistema {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: #334155;
+    color: #e2e8f0;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-activar-sistema:hover:not(:disabled) {
+    background-color: var(--accent-blue);
+    color: #0b0f19;
+}
+
+.btn-activar-sistema:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Panel Lateral */
+.panel-lateral {
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido-lateral {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.contenido-lateral .placeholder-lateral {
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.contenido-lateral .titulo-lateral {
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.contenido-lateral .desc-lateral {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.contenido-lateral .tecla-info {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+}
+
+/* Panel de Resumen / Informe Final */
+.resumen-mision {
+    background-color: #0f172a;
+    border: 2px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px;
+    font-family: var(--font-mono);
+    white-space: pre-wrap;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: #f8fafc;
+}
+
+.resumen-mision.exito {
+    border-color: var(--accent-green);
+    color: #86efac;
+}
+
+.resumen-mision.cancelada {
+    border-color: var(--accent-red);
+    color: #fca5a5;
+}
+
+.resumen-mision.abortada {
+    border-color: var(--accent-yellow);
+    color: #fde047;
+}
+
+/* Consola de Mensajes */
+.seccion-consola {
+    display: flex;
+    flex-direction: column;
+}
+
+.consola-registro {
+    background-color: #050811;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 16px;
+    height: 180px;
+    overflow-y: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.linea-consola {
+    color: #94a3b8;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.linea-consola.advertencia {
+    color: #fbbf24;
+    font-weight: bold;
+}
+
+.linea-consola.alerta {
+    color: #f87171;
+    font-weight: bold;
+}
+
+.linea-consola.exito {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.linea-consola.info-sistema {
+    color: #38bdf8;
+}

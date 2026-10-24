@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Misión Apolo</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="panel-control-container">
+        <!-- Cabecera de la Misión -->
+        <header class="cabecera-mision">
+            <h1 id="nombreMision">Misión Apolo</h1>
+            <div class="indicadores-cabecera">
+                <div class="indicador">
+                    <span class="etiqueta">Estado general:</span>
+                    <span id="estadoNave" class="valor-estado">Esperando inicio</span>
+                </div>
+                <div class="indicador">
+                    <span class="etiqueta">Tiempo restante:</span>
+                    <span id="contadorTiempo" class="valor-tiempo">90 s</span>
+                </div>
+                <div class="indicador">
+                    <span class="etiqueta">Sistemas operativos:</span>
+                    <span id="contadorSistemas" class="valor-sistemas">0 de 5</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Barra de Controles Principales -->
+        <nav class="barra-acciones">
+            <button id="btnIniciar" class="btn btn-iniciar">Iniciar misión</button>
+            <button id="btnLanzar" class="btn btn-lanzar" disabled>Lanzar nave</button>
+            <button id="btnAbandonar" class="btn btn-abandonar" disabled>Abandonar misión</button>
+            <button id="btnReiniciar" class="btn btn-reiniciar" disabled>Reiniciar misión</button>
+        </nav>
+
+        <!-- Popup de información para acciones bloqueadas -->
+        <div id="popupAlerta" class="popup-alerta" role="alert" aria-live="assertive">
+            <span id="popupMensaje">Acción bloqueada: debe activar primero el sistema anterior.</span>
+        </div>
+
+        <!-- Área Principal: Sistemas y Panel Lateral -->
+        <main class="area-principal">
+            <section class="seccion-sistemas">
+                <h2>Sistemas Principales</h2>
+                <div id="panelSistemas" class="contenedor-tarjetas">
+                    <!-- Las tarjetas de los sistemas se generan dinámicamente mediante JavaScript -->
+                </div>
+                <!-- Resumen final mostrado al cancelar o finalizar la misión -->
+                <div id="resumenMision" class="resumen-mision" hidden></div>
+            </section>
+
+            <!-- Panel lateral de información operativa -->
+            <aside class="panel-lateral">
+                <h2>Panel Lateral de Información</h2>
+                <div id="panelLateralContenido" class="contenido-lateral">
+                    <p class="placeholder-lateral">Haga clic sobre cualquier punto de una tarjeta para ver su descripción operativa. Doble clic para especificaciones técnicas.</p>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Consola de Mensajes -->
+        <footer class="seccion-consola">
+            <h2>Consola de Mensajes</h2>
+            <div id="consolaMensajes" class="consola-registro">
+                <!-- Registros cronológicos de la misión -->
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
