@@ -1,446 +1,227 @@
-/* ==========================================================
-   Panel de Control de Misión Espacial - Estilos CSS
-   ========================================================== */
-
-:root {
-    --bg-color: #0b0f19;
-    --card-bg: #151c2c;
-    --card-border: #2a364f;
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --accent-blue: #38bdf8;
-    --accent-green: #22c55e;
-    --accent-red: #ef4444;
-    --accent-yellow: #f59e0b;
-    --hover-highlight: #1e293b;
-    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --font-mono: 'Consolas', 'Courier New', Courier, monospace;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-primary);
-    font-family: var(--font-family);
-    min-height: 100vh;
-    padding: 24px;
-    display: flex;
-    justify-content: center;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
 .panel-control-container {
-    width: 100%;
-    max-width: 1100px;
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
 }
 
-/* Cabecera */
+/* Cabecera e Indicadores */
 .cabecera-mision {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 20px 24px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 15px 20px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .cabecera-mision h1 {
-    font-size: 1.8rem;
-    color: var(--accent-blue);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    margin: 0;
+    font-size: 1.5rem;
 }
 
 .indicadores-cabecera {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.indicador {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.indicador .etiqueta {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.valor-estado {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-primary);
+    gap: 15px;
+    font-size: 0.95rem;
 }
 
 .valor-tiempo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    color: var(--accent-blue);
-    padding: 2px 8px;
-    border-radius: 4px;
-    background: rgba(56, 189, 248, 0.1);
-    display: inline-block;
-    transition: all 0.3s ease;
+    font-weight: bold;
+    font-family: monospace;
 }
 
-.valor-sistemas {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--accent-yellow);
-}
-
-/* Alerta crítica con parpadeo */
+/* Alerta de 15 segundos requerida: color rojo y parpadeo */
 .alerta-parpadeo {
-    color: #ffffff !important;
-    background-color: var(--accent-red) !important;
-    animation: parpadeoAlerta 0.8s infinite alternate ease-in-out;
+    color: red !important;
+    animation: parpadeo 0.8s infinite alternate;
 }
 
-@keyframes parpadeoAlerta {
-    from {
-        opacity: 1;
-        box-shadow: 0 0 10px rgba(239, 68, 68, 0.8);
-    }
-    to {
-        opacity: 0.4;
-        box-shadow: 0 0 2px rgba(239, 68, 68, 0.2);
-    }
+@keyframes parpadeo {
+    from { opacity: 1; }
+    to { opacity: 0.2; }
 }
 
-/* Barra de Botones */
+/* Botones de acción */
 .barra-acciones {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
 }
 
-.btn {
-    padding: 10px 20px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 6px;
-    border: 1px solid transparent;
+button {
+    padding: 8px 14px;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s, transform 0.1s;
 }
 
-.btn:active:not(:disabled) {
-    transform: scale(0.98);
-}
-
-.btn:disabled {
-    opacity: 0.4;
+button:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
 }
 
-.btn-iniciar {
-    background-color: #2563eb;
-    color: #ffffff;
-}
-
-.btn-iniciar:hover:not(:disabled) {
-    background-color: #1d4ed8;
-}
-
-.btn-lanzar {
-    background-color: var(--accent-green);
-    color: #0b0f19;
-}
-
-.btn-lanzar:hover:not(:disabled) {
-    background-color: #16a34a;
-    color: #ffffff;
-}
-
-.btn-abandonar {
-    background-color: var(--accent-red);
-    color: #ffffff;
-}
-
-.btn-abandonar:hover:not(:disabled) {
-    background-color: #dc2626;
-}
-
-.btn-reiniciar {
-    background-color: #475569;
-    color: #ffffff;
-}
-
-.btn-reiniciar:hover:not(:disabled) {
-    background-color: #64748b;
-}
-
-/* Popup de advertencia de acción bloqueada */
+/* Popup de bloqueo requerido (HTML sobre la interfaz) */
 .popup-alerta {
     display: none;
-    background-color: #7f1d1d;
-    border: 1px solid #ef4444;
-    color: #fee2e2;
-    padding: 12px 16px;
-    border-radius: 6px;
-    font-weight: 500;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    animation: slideDown 0.25s ease-out;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    font-weight: bold;
 }
 
 .popup-alerta.visible {
     display: block;
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Área Principal */
+/* Área principal: Sistemas y Panel Lateral */
 .area-principal {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
+    display: flex;
+    gap: 15px;
 }
 
-@media (max-width: 768px) {
-    .area-principal {
-        grid-template-columns: 1fr;
-    }
+.seccion-sistemas {
+    flex: 2;
+}
+
+.panel-lateral {
+    flex: 1;
 }
 
 .seccion-sistemas h2,
 .panel-lateral h2,
 .seccion-consola h2 {
     font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    margin-bottom: 8px;
 }
 
-/* Contenedor de Tarjetas */
+/* Contenedor y Tarjetas de sistemas */
 .contenedor-tarjetas {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 16px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    min-height: 380px;
+    gap: 10px;
+    min-height: 250px;
 }
 
-/* Tarjeta individual de sistema */
 .tarjeta-sistema {
-    background-color: #0f172a;
-    border: 2px solid var(--card-border);
-    border-radius: 6px;
-    padding: 14px 18px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 15px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    align-items: center;
     cursor: pointer;
-    user-select: none;
-    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    background: #fafafa;
 }
 
-/* Resaltado temporal por mouseover */
+/* Resaltado temporal con mouseover y mouseout requerido */
 .tarjeta-resaltada {
-    background-color: var(--hover-highlight) !important;
-    border-color: var(--accent-blue) !important;
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    background-color: #e8f0fe !important;
+    border-color: #1a73e8 !important;
 }
 
-/* Estado Operativo */
+/* Estado operativo requerido: borde verde o fondo iluminado */
 .tarjeta-sistema.operativo {
-    border-color: var(--accent-green) !important;
-    background-color: rgba(34, 197, 94, 0.08) !important;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+    border-color: #28a745 !important;
+    background-color: #e8f8e8 !important;
+}
+
+.tarjeta-sistema.operativo .estado-sistema {
+    color: #28a745;
+    font-weight: bold;
 }
 
 .info-sistema {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 .nombre-sistema {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-weight: bold;
 }
 
 .atajo-tecla {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #666;
 }
 
 .estado-sistema {
     font-size: 0.85rem;
-    font-weight: 600;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tarjeta-sistema.operativo .estado-sistema {
-    color: var(--accent-green);
-}
-
-.btn-activar-sistema {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    background-color: #334155;
-    color: #e2e8f0;
-    border: 1px solid #475569;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.btn-activar-sistema:hover:not(:disabled) {
-    background-color: var(--accent-blue);
-    color: #0b0f19;
-}
-
-.btn-activar-sistema:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
+    color: #777;
 }
 
 /* Panel Lateral */
-.panel-lateral {
-    display: flex;
-    flex-direction: column;
-}
-
 .contenido-lateral {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 20px;
-    min-height: 380px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 12px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 15px;
+    min-height: 250px;
+    font-size: 0.95rem;
 }
 
-.contenido-lateral .placeholder-lateral {
-    color: var(--text-secondary);
-    font-style: italic;
+.titulo-lateral {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #0d6efd;
+}
+
+.desc-lateral {
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.tecla-info {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Resumen final e Informe */
+.resumen-mision {
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 6px;
+    padding: 15px;
+    font-family: monospace;
+    white-space: pre-wrap;
     line-height: 1.5;
 }
 
-.contenido-lateral .titulo-lateral {
-    color: var(--accent-blue);
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.contenido-lateral .desc-lateral {
-    color: var(--text-primary);
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.contenido-lateral .tecla-info {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-family: var(--font-mono);
-}
-
-/* Panel de Resumen / Informe Final */
-.resumen-mision {
-    background-color: #0f172a;
-    border: 2px solid var(--card-border);
-    border-radius: 8px;
-    padding: 24px;
-    font-family: var(--font-mono);
-    white-space: pre-wrap;
-    line-height: 1.7;
-    font-size: 1rem;
-    color: #f8fafc;
-}
-
-.resumen-mision.exito {
-    border-color: var(--accent-green);
-    color: #86efac;
-}
-
-.resumen-mision.cancelada {
-    border-color: var(--accent-red);
-    color: #fca5a5;
-}
-
-.resumen-mision.abortada {
-    border-color: var(--accent-yellow);
-    color: #fde047;
-}
-
 /* Consola de Mensajes */
-.seccion-consola {
-    display: flex;
-    flex-direction: column;
-}
-
 .consola-registro {
-    background-color: #050811;
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 16px;
-    height: 180px;
+    background: #222;
+    color: #eee;
+    border-radius: 6px;
+    padding: 10px 15px;
+    height: 140px;
     overflow-y: auto;
-    font-family: var(--font-mono);
+    font-family: monospace;
     font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
 }
 
 .linea-consola {
-    color: #94a3b8;
-    line-height: 1.4;
-    word-break: break-word;
+    margin-bottom: 4px;
 }
 
-.linea-consola.advertencia {
-    color: #fbbf24;
-    font-weight: bold;
-}
-
-.linea-consola.alerta {
-    color: #f87171;
-    font-weight: bold;
-}
-
-.linea-consola.exito {
-    color: #4ade80;
-    font-weight: bold;
-}
-
-.linea-consola.info-sistema {
-    color: #38bdf8;
-}
+.linea-consola.advertencia { color: #ffc107; }
+.linea-consola.alerta { color: #ff6b6b; font-weight: bold; }
+.linea-consola.exito { color: #51cf66; font-weight: bold; }
+.linea-consola.info-sistema { color: #74c0fc; }

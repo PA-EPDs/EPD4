@@ -3,14 +3,6 @@
  * EPD 4 - JavaScript Avanzado
  * Ejercicio 1: Panel de Control de Misión Espacial
  *
- * Resultados de Aprendizaje aplicados:
- * RA1: Eventos dinámicos en JavaScript (click, keydown, mouseover, mouseout, dblclick).
- * RA3: Validación secuencial de activación de sistemas y control de errores.
- * RA4: Temporización con setInterval, clearInterval, setTimeout y clearTimeout.
- * RA5: Propagación de eventos (stopPropagation, event.target === event.currentTarget).
- * RA6: Manipulación y creación dinámica de elementos en el DOM.
- * RA7: Modificación visual y aplicación de estilos CSS mediante JS.
- * RA8: Integración de objetos del navegador (window.alert, window.confirm, document.title).
  * ====================================================================
  */
 
@@ -245,14 +237,14 @@ function vincularEventosGlobales() {
     // Botón Reiniciar misión
     dom.btnReiniciar.addEventListener('click', inicializarMision);
 
-    // RA5: Detección de clic directo sobre el contenedor principal (márgenes/espacios)
+    // Detección de clic directo sobre el contenedor principal (márgenes/espacios)
     dom.panelSistemas.addEventListener('click', (event) => {
         if (event.target === event.currentTarget) {
             registrarEnConsola('Panel de sistemas seleccionado.');
         }
     });
 
-    // RA1 y RA2: Control mediante teclado numérico (1 a 5)
+    // Control mediante teclado numérico (1 a 5)
     window.addEventListener('keydown', (event) => {
         if (!estadoApp.misionIniciada || estadoApp.misionFinalizada) {
             return;
@@ -319,8 +311,8 @@ function iniciarMision() {
 
 /**
  * Intenta activar un sistema verificando la secuencia estricta.
- * @param {number} index Índice del sistema seleccionado (0 a 4)
- * @param {string} metodo 'ratón' o 'teclado'
+ * index Índice del sistema seleccionado (0 a 4)
+ * metodo 'ratón' o 'teclado'
  */
 function intentarActivarSistema(index, metodo) {
     if (!estadoApp.misionIniciada || estadoApp.misionFinalizada) {
@@ -335,7 +327,7 @@ function intentarActivarSistema(index, metodo) {
         return;
     }
 
-    // RA3: Validación estricta del orden secuencial
+    // Validación estricta del orden secuencial
     if (index === estadoApp.sistemaSiguienteIndex) {
         // Activación correcta
         sistema.operativo = true;
@@ -373,7 +365,6 @@ function intentarActivarSistema(index, metodo) {
 
 /**
  * Muestra el mensaje de bloqueo durante 3 segundos con control de solapamiento.
- * @param {string} mensaje Texto a mostrar
  */
 function mostrarAvisoBloqueo(mensaje) {
     // Si ya hay un temporizador activo, cancelarlo antes de lanzar el nuevo
@@ -393,7 +384,7 @@ function mostrarAvisoBloqueo(mensaje) {
 
 /**
  * Muestra en el panel lateral la descripción operativa del sistema seleccionado.
- * @param {Object} sistema
+ * 
  */
 function mostrarDescripcionEnPanelLateral(sistema) {
     dom.panelLateralContenido.innerHTML = `
@@ -445,7 +436,7 @@ function iniciarSecuenciaLanzamiento() {
 function finalizarLanzamientoExitoso() {
     estadoApp.misionFinalizada = true;
 
-    // RA8: Modificar el título de la pestaña del navegador
+    // Modificar el título de la pestaña del navegador
     document.title = '¡Misión en Vuelo! - Lanzamiento Exitoso';
 
     // Estado general
@@ -507,7 +498,7 @@ function cancelarMisionPorTiempoAgotado() {
  * Gestiona la cancelación manual de la misión con confirmación nativa.
  */
 function confirmarAbandonoMision() {
-    // RA8: Confirmación nativa mediante window.confirm
+    // Confirmación nativa mediante window.confirm
     const confirmado = window.confirm('¿Confirma que desea abortar la misión en curso?');
     if (!confirmado) {
         return;
@@ -530,7 +521,7 @@ function confirmarAbandonoMision() {
     // Registrar en consola
     registrarEnConsola('Aborto de misión confirmado.', 'alerta');
 
-    // RA8: Cambiar título de la página
+    // Cambiar título de la página
     document.title = 'Misión abortada';
 
     // Mostrar resumen de aborto
@@ -566,7 +557,7 @@ function actualizarContadorSistemasVisual() {
 
 /**
  * Habilita o deshabilita los botones individuales de las tarjetas de sistemas.
- * @param {boolean} habilitar
+ * 
  */
 function habilitarControlesSistemas(habilitar) {
     const botones = dom.panelSistemas.querySelectorAll('.btn-activar-sistema');
@@ -582,8 +573,8 @@ function habilitarControlesSistemas(habilitar) {
 
 /**
  * Agrega un registro cronológico a la consola de mensajes de la misión.
- * @param {string} texto
- * @param {string} tipo 'normal' | 'info-sistema' | 'advertencia' | 'alerta' | 'exito'
+ * 
+ * tipo 'normal' | 'info-sistema' | 'advertencia' | 'alerta' | 'exito'
  */
 function registrarEnConsola(texto, tipo = 'normal') {
     const linea = document.createElement('div');
@@ -599,8 +590,7 @@ function registrarEnConsola(texto, tipo = 'normal') {
 
 /**
  * Muestra el informe de balance en el área de resumen.
- * @param {string} textoInforme
- * @param {string} claseEstilo 'exito' | 'cancelada' | 'abortada'
+ * 
  */
 function mostrarResumenFinal(textoInforme, claseEstilo) {
     dom.resumenMision.className = `resumen-mision ${claseEstilo}`;
